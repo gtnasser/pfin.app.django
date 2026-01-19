@@ -25,6 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@*&8kh$oll#f47%$v7lh_f%*f%ed29)$lpb6+m@)71o&xdo0*y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
 DEBUG = True
 DEBUG = False
 
@@ -78,14 +79,29 @@ WSGI_APPLICATION = 'core.wsgi.app' # usado em producao ou desenv + middleware
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {}
-#if DEBUG:
-#    DATABASES = {
-#        'default': {
-#            'ENGINE': 'django.db.backends.sqlite3',
-#            'NAME': BASE_DIR / 'db.sqlite3',
-#        }
-#    }
+
+
+if DEBUG:
+    # Banco para desenvolvimento (SQLite)
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
+else:
+    # Banco para produção (PostgreSQL)
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("POSTGRES_DB", "meubanco"),
+            "USER": os.getenv("POSTGRES_USER", "usuario"),
+            "PASSWORD": os.getenv("POSTGRES_PASSWORD", "senha"),
+            "HOST": os.getenv("POSTGRES_HOST", "localhost"),
+            "PORT": os.getenv("POSTGRES_PORT", "5432"),
+        }
+    }
+
 
 
 # Password validation
