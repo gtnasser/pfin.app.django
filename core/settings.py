@@ -136,4 +136,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 
+# vercel
+ALLOWED_HOSTS = ALLOWED_HOSTS + ['.vercel.app']
 
