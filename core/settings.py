@@ -25,8 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@*&8kh$oll#f47%$v7lh_f%*f%ed29)$lpb6+m@)71o&xdo0*y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-DEBUG = False
+DEBUG = True
+#DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
@@ -70,7 +70,9 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'core.wsgi.application'
+WSGI_APPLICATION = 'core.wsgi.app' # usado em producao ou desenv + middleware
 
 
 # Database
@@ -130,5 +132,8 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Whitenoise storage para compressão e cache busting
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+
 
 
