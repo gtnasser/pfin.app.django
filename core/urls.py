@@ -17,6 +17,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from financas.views import index
+from django.conf import settings 
+from django.conf.urls.static import static
+from django.contrib.staticfiles.views import serve 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', index),
 ]
+
+print(f"DEBUG: {settings.DEBUG}")
+print(urlpatterns)
+
+# hack para usar a pasta estatica em desenvolvimento sem ter que executar collectstatic
+#if settings.DEBUG: 
+#    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+#    print(urlpatterns)
+
+#urlpatterns += static(settings.STATICFILES_DIRS)
