@@ -134,8 +134,11 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-
-
 # deploy -> vercel
 ALLOWED_HOSTS = ALLOWED_HOSTS + ['.vercel.app']
+
+# desativa o modo estrito, evita o travamento se não encontrar algum arquivo específico no manifesto
+WHITENOISE_MANIFEST_STRICT = False
+
+
 
