@@ -31,9 +31,3 @@ urlpatterns = [
 print(f"DEBUG: {settings.DEBUG}")
 print(urlpatterns)
 
-# hack para usar a pasta estatica em desenvolvimento sem ter que executar collectstatic
-#if settings.DEBUG: 
-#    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-#    print(urlpatterns)
-
-#urlpatterns += static(settings.STATICFILES_DIRS)

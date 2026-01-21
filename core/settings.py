@@ -10,9 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
-from pathlib import Path
 import os
-from django.conf import settings
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Carrega as variáveis do arquivo .env
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,9 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@*&8kh$oll#f47%$v7lh_f%*f%ed29)$lpb6+m@)71o&xdo0*y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
-DEBUG = True
-DEBUG = False
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
@@ -80,28 +81,19 @@ WSGI_APPLICATION = 'core.wsgi.app' # usado em producao ou desenv + middleware
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 
-
-if DEBUG:
-    # Banco para desenvolvimento (SQLite)
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
+# Banco para desenvolvimento (SQLite)
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
-else:
-    # Banco para produção (PostgreSQL)
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.getenv("POSTGRES_DB", "meubanco"),
-            "USER": os.getenv("POSTGRES_USER", "usuario"),
-            "PASSWORD": os.getenv("POSTGRES_PASSWORD", "senha"),
-            "HOST": os.getenv("POSTGRES_HOST", "localhost"),
-            "PORT": os.getenv("POSTGRES_PORT", "5432"),
-        }
-    }
+}
 
+
+DATABASE_URL = os.getenv('DATABASE_URL')
+print(".env -------------------------- ")
+print(f"SECRET_KEY={SECRET_KEY}")
+print(f"DATABASE_URL={DATABASE_URL}")
 
 
 # Password validation

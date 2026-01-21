@@ -1,0 +1,28 @@
+# Virtual Environment
+venv/
+env/
+
+# config & secrets
+.env*
+!.env.exemplo
+
+# Django-specific files
+*.pot
+*.py[cod]
+__pycache__/
+**/__pycache__/
+
+db.sqlite3
+
+# Pasta de arquivos estáticos gerada pelo collectstatic
+staticfiles/
+
+# PyCharm-specific files
+.idea/
+
+# Other files
+.DS_Store
+Thumbs.db
+.coverage
+.tox/
+.eggs/
