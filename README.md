@@ -216,7 +216,11 @@ Para publicar, a forma mais fácil é:
 - Importante: Nas configurações de Environment Variables (Variáveis de Ambiente) da Vercel, adicione:
     - PYTHON_VERSION: 3.12
 
-Lembrando que o SQLite não é suportado no Vercel, enão neste momento o módulo **Admin** nativo do Django só funcionará até a tela de login.
+Obs: o SQLite no Vercel é volátil, é recriado a cada sessão, então neste momento o módulo **Admin** nativo do Django só funcionará até a tela de login porque nào existirá nenhum usuário cadastrado. Para efeitos de teste, podemos criar um superusuário em uma linha de comando usando a API do Django. Insira a linha abixo em *build_files.sh* após as migrations:
+```bash
+python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.filter(username='admin').exists() or User.objects.create_superuser('admin', 'admin@exemplo.com', 'sua_senha_segura')"
+```
+
 
 
 
