@@ -92,8 +92,9 @@ DATABASES = {
 
 DATABASE_URL = os.getenv('DATABASE_URL')
 print(".env -------------------------- ")
-print(f"SECRET_KEY={SECRET_KEY}")
 print(f"DATABASE_URL={DATABASE_URL}")
+print(f"DATABASES={DATABASES}")
+print(".env -------------------------- ")
 
 
 # Password validation
